@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Movie Application</title>
+</head>
+
+<body class="bg-gray-900 text-white">
+  <header class="bg-gray-800 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Movie</h1>
+      <div class="flex items-center mb-4 ">
+        <input type="text" id="movieName" class="bg-white w-full px-4 py-2 rounded-l-lg bg-gray-800 text-gray-300 focus:outline-none"
+          placeholder="Search movies...">
+        <button class="px-6 py-2 bg-indigo-500 text-white rounded-r-lg ml-2 searchButton">Search</button>
+      </div>
+    </div>
+  </header>
+
+
+
+  <main class="container mx-auto my-8 px-4">
+
+
+
+      <!-- movie part -->
+      <div class="grid grid-cols-1 gap-4 gap-y-6 border-b border-gray-300 py-2 pb-20 md:grid-cols-2 lg:grid-cols-4 movie_main">
+        
+        </div>
+      </div>
+
+  </main>
+  <footer class="bg-gray-800 py-4">
+    <div class="container mx-auto px-4">
+      <p class="text-center text-gray-500">&copy; 2023 Movie Application. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+<script type="module" src="/src/main.js"></script>
+
+</html>
