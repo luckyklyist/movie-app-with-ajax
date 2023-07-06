@@ -1,25 +1,51 @@
-const fetchMovie = async (movieName) => {
-    console.log("movie name",movieName);
-    const data = await fetch(`http://www.omdbapi.com/?apikey=24d8caa8&s=${movieName}`);
-    const movieData=await data.json();
-    const {Search}=movieData;
-    return Search;
+let movieNotFound=document.querySelector("#movieNotFound")
+const errorRender = () => {
+    console.log("hey");
+    movieNotFound.innerHTML = `<div class="text-center">
+    <h2 class="text-3xl font-bold mb-4">Movie Not Found</h2>
+    <p class="text-gray-500">Sorry, the movie you are looking for could not be found.</p>
+  </div>`
 }
+
+const fetchMovie = async (movieName) => {
+    try {
+        const data = await fetch(`http://www.omdbapi.com/?apikey=24d8caa8&s=${movieName}`);
+        const movieData = await data.json();
+        return movieData;
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+const clearMovieNotFound = () => {
+    while (movieNotFound.firstChild) {
+      movieNotFound.firstChild.remove();
+    }
+  };
 
 const clearMovies = () => {
     while (movieMainElement.firstChild) {
-      movieMainElement.removeChild(movieMainElement.firstChild);
+        movieMainElement.removeChild(movieMainElement.firstChild);
     }
-  };
+};
 
 const movieMainElement = document.querySelector('.movie_main');
 
 const movie = async (movieName) => {
     const fetchData = await fetchMovie(movieName);
+    console.log(fetchData)
+    if (fetchData.Response === "False") {
+        console.log("err")
+        errorRender();
+        return;
+    }
+    clearMovieNotFound();
+    const { Search } = fetchData;
     clearMovies();
-    
 
-    fetchData.forEach((movie) => {
+
+    Search.forEach((movie) => {
         const movieElem = document.createElement('div');
         movieElem.className = 'rounded-md border overflow-hidden shadow-lg hover:shadow-xl p-4 bg-gray-200 hover:scale-110 duration-300 ';
 
@@ -56,7 +82,16 @@ const searchMovie = () => {
 }
 
 const searchButton = document.querySelector(".searchButton");
-searchButton.addEventListener("click", searchMovie);
+// searchButton.addEventListener("click", searchMovie);
+
+const searchMenu = document.querySelector("#moviename");
+
+searchMenu.addEventListener("input", () => {
+    const movieName = searchMenu.value;
+    if (movieName.length > 3) {
+        movie(movieName);
+    }
+});
 
 
 
