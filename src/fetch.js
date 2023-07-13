@@ -1,8 +1,8 @@
-// const fetchMovie = async () => {
-//     const data = await fetch(`http://www.omdbapi.com/?apikey=24d8caa8&s=Avengers`);
-//     const movieData=await data.json();
-//     const {Search}=movieData;
-//     return Search;
-// }
+const fetchData=async()=>{
+    const data=await fetch("linl")
+    const movieData=await data.json()
+    return movieData;
+}
 
-// export default fetchMovie;
+
+console.log(movieData);

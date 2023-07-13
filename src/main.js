@@ -1,10 +1,20 @@
-let movieNotFound=document.querySelector("#movieNotFound")
+let movieNotFound = document.querySelector("#movieNotFound")
 const errorRender = () => {
     console.log("hey");
     movieNotFound.innerHTML = `<div class="text-center">
     <h2 class="text-3xl font-bold mb-4">Movie Not Found</h2>
     <p class="text-gray-500">Sorry, the movie you are looking for could not be found.</p>
   </div>`
+}
+
+function debounce(func, timeout = 500) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this, args)
+        }, timeout)
+    }
 }
 
 const fetchMovie = async (movieName) => {
@@ -20,9 +30,9 @@ const fetchMovie = async (movieName) => {
 
 const clearMovieNotFound = () => {
     while (movieNotFound.firstChild) {
-      movieNotFound.firstChild.remove();
+        movieNotFound.firstChild.remove();
     }
-  };
+};
 
 const clearMovies = () => {
     while (movieMainElement.firstChild) {
@@ -88,7 +98,7 @@ const searchMenu = document.querySelector("#moviename");
 
 searchMenu.addEventListener("input", () => {
     const movieName = searchMenu.value;
-    if (movieName.length > 3) {
+    if (movieName.length > 1) {
         movie(movieName);
     }
 });
